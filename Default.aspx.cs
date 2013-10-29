@@ -35,11 +35,11 @@ public partial class fbtest : System.Web.UI.Page
                 dynamic result = fb.Post("oauth/access_token", new
                 {
 
-                    client_id = "180695878737541",
+                    client_id = "your app id",
 
-                    client_secret = "e6c2fbcde68f87e9566d42f1108c0d3a",
+                    client_secret = "your app secrect key",
 
-                    redirect_uri = "http://localhost/GED/FacebookSDKExample/FacebookSDKExample/",
+                    redirect_uri = "your redirect website address",
 
                     code = accessCode
 
@@ -82,9 +82,9 @@ public partial class fbtest : System.Web.UI.Page
             var loginUrl = fb.GetLoginUrl(new
             {
 
-                client_id = "180695878737541",
+                client_id = "your app id ",
 
-                redirect_uri = "http://localhost/GED/FacebookSDKExample/FacebookSDKExample/",
+                redirect_uri = "your redirect website address",
 
                 response_type = "code",
 
@@ -103,7 +103,7 @@ public partial class fbtest : System.Web.UI.Page
         {
             access_token = Session["AccessToken"],
 
-            next = "http://localhost/GED/FacebookSDKExample/FacebookSDKExample/"
+            next = "your redirect website address"
 
         });
 
@@ -116,36 +116,20 @@ public partial class fbtest : System.Web.UI.Page
     private void GetUserData(string accessToken)
     {
         var fb = new FacebookClient(accessToken);
-        dynamic me = fb.Get("/me/statuses?limit=10000");
-        Response.Write(me);
+        dynamic status = fb.Get("/me/statuses?limit=10000");//取得文字動態訊息，最多10000筆
+        Response.Write(status);
         
     
-        /*
+        /*另一種取得個人資料的方式
         dynamic me = fb.Get("me?fields=friends,name,email,favorite_athletes");
 
         string id = me.id; // Store in database
         string email = me.email; // Store in database
         string FBName = me.name; // Store in database            
         Response.Write(id);
-        */
-        /*
-        ViewState["FBName"] = FBName; // Storing User's Name in ViewState
-
-        var friends = me.friends;
-
-        foreach (var friend in (JsonArray)friends["data"])
-        {
-            ListItem item = new ListItem((string)(((JsonObject)friend)["name"]), (string)(((JsonObject)friend)["id"]));
-            FriendList.Items.Add(item);
-        }
-
-        var athletes = me.favorite_athletes;
-
-        foreach (var athlete in (JsonArray)athletes)
-        {
-            SportsPersonList.Items.Add((string)(((JsonObject)athlete)["name"]));
-        }
-        */
+        Response.Write(email);
+        Response.Write(FBName);
+        
         Login.Text = "Log Out";
     }
     protected void TextBox1_TextChanged(object sender, EventArgs e)
