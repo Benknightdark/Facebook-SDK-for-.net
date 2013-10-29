@@ -129,7 +129,7 @@ public partial class fbtest : System.Web.UI.Page
         Response.Write(id);
         Response.Write(email);
         Response.Write(FBName);
-        
+        */
         Login.Text = "Log Out";
     }
     protected void TextBox1_TextChanged(object sender, EventArgs e)
