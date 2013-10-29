@@ -119,8 +119,8 @@ public partial class fbtest : System.Web.UI.Page
         dynamic status = fb.Get("/me/statuses?limit=10000");//取得文字動態訊息，最多10000筆
         Response.Write(status);
         
-    
-        /*另一種取得個人資料的方式
+        //另一種取得個人資料的方式
+        /*
         dynamic me = fb.Get("me?fields=friends,name,email,favorite_athletes");
 
         string id = me.id; // Store in database
